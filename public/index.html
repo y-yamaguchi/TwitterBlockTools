@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>一括ブロック</title>
+        <link rel='stylesheet' href='stylesheets/twitter.css' type='text/css' media='all' />
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" crossorigin="anonymous">
+            </script>
+    </head>
+
+    <body>
+        <form id="mainForm">
+            <input type="text" name="search_words" placeholder="検索ワード" value="">
+            <input type="button" id="search" value="検索">
+        </form>
+
+        <input type="button" id="block" value="一括ブロック">
+
+        <!-- ▼twitter風ここから -->
+        <div class="twitter__container">
+            <!-- タイトル -->
+            <div class="twitter__title">
+                <span class="twitter-logo"></span>
+            </div>
+
+            <!-- ▼タイムラインエリア scrollを外すと高さ固定解除 -->
+            <div class="twitter__contents">
+
+            </div>
+            <!--　▲タイムラインエリア ここまで -->
+        </div>
+        <!--　▲twitter風ここまで -->
+
+        <div class='error'>
+        </div>
+        <script src="javascripts/main.js"></script>
+    </body>
+
+</html>
