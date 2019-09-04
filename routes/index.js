@@ -12,11 +12,20 @@ router.get('/search', function (req, res, next) {
   console.log(q);
 
   async function getJSON() {
-    //console.log(await s.search(q));
     res.send(await s.search(q));
   }
   getJSON();
 });
+
+router.get('/blockids', function (req, res, next) {
+  const g = require('../getBlockIDs.js');
+  
+  async function getJSON() {
+    res.send(await g.blockids());
+  }
+  getJSON();
+});
+
 
 router.post('/block', function (req, res, next) {
   const b = require('../block.js');

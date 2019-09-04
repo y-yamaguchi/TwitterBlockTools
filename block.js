@@ -1,12 +1,17 @@
-exports.block = function (users) {
-    "use strict";
-    const twitter = require("twitter");
-    const fs = require("fs");
+'use strict';
+/**
+ * ユーザーをブロックするための関数
+ * @param {Array} users ブロック対象ユーザーの配列
+ */
 
-    const client = new twitter(JSON.parse(fs.readFileSync("secret.json", "utf-8")));
+exports.block = function (users) { 
+    const twitter = require('twitter');
+    const fs = require('fs');
+
+    const client = new twitter(JSON.parse(fs.readFileSync('secret.json', 'utf-8')));
 
     users.forEach((name, index) => {
-        const params = { screen_name: name };
+        const params = { screen_name: name, skip_status: true};
 
         setTimeout(
             function () {
@@ -16,6 +21,6 @@ exports.block = function (users) {
                         console.log(tweets);
                     }
                 });
-            }, 2000 * index);
+            }, 1200 * index);
     });
 };
