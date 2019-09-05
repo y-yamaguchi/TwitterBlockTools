@@ -17,6 +17,20 @@ router.get('/search', function (req, res, next) {
   getJSON();
 });
 
+router.get('/addSearch', function (req, res, next) {
+  const as = require('../addSearch.js');
+  const q = req.query['search_words'];
+  console.log(`追加検索:${q}`);
+  const maxid = req.query['id'];
+  console.log(maxid);
+
+  async function getJSON() {
+    res.send(await as.addSearch(q,maxid));
+  }
+  getJSON();
+});
+
+
 router.get('/blockids', function (req, res, next) {
   const g = require('../getBlockIDs.js');
   
