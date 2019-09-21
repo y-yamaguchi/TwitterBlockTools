@@ -8,7 +8,8 @@ exports.block = function (users) {
     const twitter = require('twitter');
     const fs = require('fs');
 
-    const client = new twitter(JSON.parse(fs.readFileSync('secret.json', 'utf-8')));
+    // const client = new twitter(JSON.parse(fs.readFileSync('secret.json', 'utf-8')));
+    const client = require('./share').client;
 
     users.forEach((name, index) => {
         const params = { screen_name: name, skip_status: true};

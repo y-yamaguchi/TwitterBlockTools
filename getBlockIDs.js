@@ -1,11 +1,12 @@
 exports.blockids = function () {
     return new Promise((resolve, reject) => {
-        "use strict";
+        'use strict';
 
-        const twitter = require("twitter");
-        const fs = require("fs");
+        const twitter = require('twitter');
+        const fs = require('fs');
 
-        const client = new twitter(JSON.parse(fs.readFileSync("secret.json", "utf-8")));
+        // const client = new twitter(JSON.parse(fs.readFileSync('secret.json', 'utf-8')));
+        const client = require('./share').client;
 
         const params = { stringify_ids: true };
 
@@ -13,6 +14,7 @@ exports.blockids = function () {
             if (!error) {
                 resolve(ids);
             }
+            reject(error);
         });
     });
 };

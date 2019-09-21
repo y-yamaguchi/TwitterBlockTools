@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+// router.get('/', function (req, res, next) {
+//   res.render('index', { title: 'Express' });
+// });
 
 router.get('/search', function (req, res, next) {
   const s = require('../search.js');
@@ -25,19 +25,24 @@ router.get('/addSearch', function (req, res, next) {
   console.log(maxid);
 
   async function getJSON() {
-    res.send(await as.addSearch(q,maxid));
+    res.send(await as.addSearch(q, maxid));
   }
   getJSON();
 });
 
 
-router.get('/blockids', function (req, res, next) {
-  const g = require('../getBlockIDs.js');
-  
-  async function getJSON() {
-    res.send(await g.blockids());
+router.get('/blockids', async function (req, res, next) {
+  if (require('./../share').client == null) {
+    res.send('./auth/twitter');
   }
-  getJSON();
+  else {
+    const g = require('../getBlockIDs.js');
+
+    async function getJSON() {
+      res.send(await g.blockids().catch(e => console.error(e)));
+    }
+    await getJSON();
+  }
 });
 
 
@@ -48,8 +53,25 @@ router.post('/block', function (req, res, next) {
 
   b.block(q);
 
-  const response = JSON.stringify(["OK"]);
+  const response = JSON.stringify(['OK']);
   res.send(response);
 });
+
+
+router.get('/authentication', function(req, res, next){
+  if (require('./../share').client == null) {
+    res.send('./auth/twitter');
+  }
+  else{
+    res.send('OK');
+  }
+});
+
+// // 追加
+// res.render('index', {
+//   title: 'login demo',
+//   session: req.session.passport //passportでログイン後は、このオブジェクトに情報が格納されます。
+// });
+
 
 module.exports = router;

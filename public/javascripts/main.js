@@ -10,13 +10,25 @@ function enter() {
     }
 }
 
+// 認証できているかチェック
+const urlA = 'http://127.0.0.1:3000/authentication';
+$.get(urlA, null, null)
+    .done(function (res) {
+        if(res == 'OK'){
+            console.log(res);
+        }
+        else{
+            window.location.replace(res);
+        }
+    })
+    .fail(function (err) {console.log(err);});
+
 
 function getBlockIDs() {
     return new Promise(function (resolve, reject) {
-        const urlB = 'http://localhost:3000/blockids';
+        const urlB = 'http://127.0.0.1:3000/blockids';
         $.get(urlB, null, null, 'json')
             .done(function (res) {
-                //blockids = res.ids;
                 resolve(res.ids);
             })
             .fail(function (err) {
@@ -28,7 +40,7 @@ function getBlockIDs() {
 
 function getSearchTweets(blockids) {
     return new Promise(function (resolve, reject) {
-        const urlS = 'http://localhost:3000/search';
+        const urlS = 'http://127.0.0.1:3000/search';
 
         const queryWords = $('#mainForm').serialize();
         console.log(queryWords);
@@ -89,11 +101,11 @@ function getAddSearchTweets() {
         console.log(queryWords);
 
         $.ajax({
-            url: 'http://localhost:3000/addSearch',
+            url: 'http://127.0.0.1:3000/addSearch',
             type: 'GET',
             data: {
                 'id': maxid,
-                'search_words':queryWords
+                'search_words': queryWords
             }
         })
             .done(function (tweets) {
@@ -135,7 +147,7 @@ async function searchProcessAll() {
         $('#subArea').append('<input type="button" id="addSearch" value="追加検索">');
 
     } catch (err) {
-
+        console.error(err);
     }
 }
 
@@ -175,6 +187,10 @@ $('#block').on('click', function () {
 
     let userData = [];
 
+    if (!$('.selected').length) { // 何も選択されていないとき
+        return;
+    }
+
     $('.selected').each(function () {
         const id = $(this).attr('id');
         userData.push($(`#${id} .name_reply`).text().replace('@', ''));
@@ -183,7 +199,7 @@ $('#block').on('click', function () {
     const userJSON = JSON.stringify(userData);
 
     $.ajax({
-        url: 'http://localhost:3000/block',
+        url: 'http://127.0.0.1:3000/block',
         type: 'POST',
         data: userJSON,
         contentType: 'application/json',
