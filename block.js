@@ -22,6 +22,6 @@ exports.block = function (users) {
                         console.log(tweets);
                     }
                 });
-            }, 1200 * index);
+            }, 1000 * index);
     });
 };

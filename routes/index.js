@@ -25,7 +25,7 @@ router.get('/addSearch', function (req, res, next) {
   console.log(maxid);
 
   async function getJSON() {
-    res.send(await as.addSearch(q, maxid));
+    res.send(await as.addSearch(q, maxid-1));
   }
   getJSON();
 });
@@ -39,7 +39,10 @@ router.get('/blockids', async function (req, res, next) {
     const g = require('../getBlockIDs.js');
 
     async function getJSON() {
-      res.send(await g.blockids().catch(e => console.error(e)));
+      const data = await g.blockids().catch(e => console.error(e));
+      console.log(data);
+      // res.send(await g.blockids().catch(e => console.error(e)));
+      res.send(data);
     }
     await getJSON();
   }

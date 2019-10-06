@@ -5,19 +5,27 @@
         <meta charset="utf-8">
         <title>一括ブロック</title>
         <link rel='stylesheet' href='stylesheets/twitter.css' type='text/css' media='all' />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" crossorigin="anonymous">
             </script>
     </head>
 
-    <body>
+    <body class="bg-light">
         <form id="mainForm">
-            <input type="text" name="search_words" placeholder="検索ワード" value="">
-            <input type="button" id="search" value="検索">
+            <div class="form-inline col-md-3">
+                <div>
+                    <input type="text" name="search_words" placeholder="検索ワード" value="">
+                    <input type="button" class="btn btn-primary" id="search" value="検索">
+                </div>
+                <div id="subArea"></div>
+            </div>
         </form>
-        <div id="subArea"></div>
+        <!-- <div id="subArea"></div> -->
+        <input type="button" class="btn btn-warning" id="select_all" value="全選択">
 
-        <input type="button" id="block" value="一括ブロック">
+        <input type="button" class="btn btn-danger" id="block" value="一括ブロック">
 
         <!-- ▼twitter風ここから -->
         <div class="twitter__container">

@@ -135,6 +135,7 @@ async function searchProcessAll() {
     try {
         // ブロックしたユーザーIDの取得
         blockids = await getBlockIDs();
+        console.log(blockids);
 
         // ツイート一覧をクリーンにする
         $('.twitter__contents').empty();
@@ -144,7 +145,7 @@ async function searchProcessAll() {
 
         //const countC = $('.twitter__block').length;
         $('#subArea').empty();
-        $('#subArea').append('<input type="button" id="addSearch" value="追加検索">');
+        $('#subArea').append('<input type="button" class="btn btn-secondary" id="addSearch" value="追加検索">');
 
     } catch (err) {
         console.error(err);
@@ -180,6 +181,12 @@ $('.twitter__contents').on('click', '.twitter__block', function () {
     const id = $(this).attr('id');
     $(`#${id}`).toggleClass('selected');
 });
+
+$('#select_all').on('click', function(){
+    $('.twitter__contents').each(function(){
+        $('.twitter__block').toggleClass('selected');
+    });
+})
 
 
 $('#block').on('click', function () {
