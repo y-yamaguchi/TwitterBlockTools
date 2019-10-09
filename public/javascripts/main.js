@@ -200,7 +200,10 @@ $('#block').on('click', function () {
 
     $('.selected').each(function () {
         const id = $(this).attr('id');
-        userData.push($(`#${id} .name_reply`).text().replace('@', ''));
+        const addID = $(`#${id} .name_reply`).text().replace('@', '');
+        if(!userData.includes(addID)){
+        userData.push(addID);
+        }
     });
 
     const userJSON = JSON.stringify(userData);

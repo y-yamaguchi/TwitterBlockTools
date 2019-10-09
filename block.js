@@ -4,7 +4,7 @@
  * @param {Array} users ブロック対象ユーザーの配列
  */
 
-exports.block = function (users) { 
+exports.block = function (users) {
     const twitter = require('twitter');
     const fs = require('fs');
 
@@ -12,16 +12,18 @@ exports.block = function (users) {
     const client = require('./share').client;
 
     users.forEach((name, index) => {
-        const params = { screen_name: name, skip_status: true};
+        const params = { screen_name: name, skip_status: true };
 
         setTimeout(
             function () {
                 client.post('blocks/create', params, function (error, tweets, response) {
                     if (!error) {
                         console.log(`${name} is blocked!`);
-                        console.log(tweets);
+                        // console.log(tweets);
+                    } else {
+                        console.log(error);
                     }
                 });
-            }, 1000 * index);
+            }, 300 * index);
     });
 };
