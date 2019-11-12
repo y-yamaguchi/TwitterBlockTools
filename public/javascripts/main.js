@@ -156,6 +156,7 @@ async function addSearchProcess() {
     try {
         // 検索結果の取得
         await getAddSearchTweets();
+        // $('#addSearch').prop('disabled', false);
     } catch (err) {
 
     }
@@ -171,6 +172,7 @@ $('#search').on('click',
 
 $('#subArea').on('click', '#addSearch',
     function () {
+        // $('#addSearch').prop('disabled', true);
         console.log('追加検索がクリックされたよ');
         addSearchProcess();
     }

@@ -24,6 +24,6 @@ exports.block = function (users) {
                         console.log(error);
                     }
                 });
-            }, 300 * index);
+            }, 100 * index);
     });
 };
